@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holding</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        .serch_possition {
+            position: absolute;
+            right: 10px;
+        }
+
+        .max_width {
+            max-width: 1153px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container mt-5 max_width">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="d-inline-block">Dashboard</h4>
+
+                        <input type="serch" class="serch_possition" placeholder="Serch ">
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <tr align="center">
+                                <th>Company Name</th>
+                                <th>Qty.</th>
+                                <th>Price</th>
+                                <th>Total</th>
+                            </tr>
+                            {% for row in available %}
+                            {% if row.1 > 0 %}
+                            <tr>
+                                <td>{{row.0}} </td>
+                                <td align="center"> {{row.1|int}} </td>
+                                {% set price = "{:.2f}".format(row.2) %}
+                                <td align="right"> {{price}} </td>
+                                {% set total = "{:.2f}".format(row.3) %}
+                                <td align="right">{{total}} </td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

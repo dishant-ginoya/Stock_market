@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>final home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+    <style>
+        .main_none {
+            display: none;
+        }
+
+        .main {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .sub {
+            background-color: rgba(255, 255, 255, 1);
+            position: absolute;
+            width: 0;
+            height: 40px;
+            overflow: hidden;
+            right: 4%;
+            bottom: 5px;
+            transition: width 0s;
+        }
+        
+
+        .main:hover .sub {
+            width: 63%;
+        }
+
+        .btn-td {
+            margin-bottom: 0%;
+            margin-top: 1%;
+            border-radius: 20%;
+            width: 21%;
+            font-weight: 600;
+            height: 90%;
+        }
+
+        .btn-td a {
+            color: #ffffff;
+        }
+
+        .btn-td:nth-child(3) {
+            width: 24%;
+        }
+
+        .e-search {
+            width: 85%;
+        }
+
+        .td_font {
+            font-size: 20px;
+        }
+
+        .scroll {
+            width: 100%;
+            height: 555px;
+            overflow-y: scroll;
+        }
+
+        input[type="tel"] {
+            width: 138px;
+        }
+
+        input[type="number"] {
+            width: 138px;
+        }
+
+        .btn-margin {
+            position: absolute;
+            right: 15px;
+            top: 18px;
+        }
+
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            transition: opacity 0.1s, visibility .1s;
+            z-index: 999;
+        }
+
+        .loader-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader::after {
+            content: "";
+            width: 75px;
+            height: 75px;
+            border: 10px solid black;
+            border-top-color: blue;
+            border-bottom-color: red;
+            border-radius: 50%;
+            animation: loading 1s ease infinite;
+        }
+
+        @keyframes loading {
+            from {
+                transform: rotate(0turn);
+            }
+
+            to {
+                transform: rotate(1turn);
+            }
+        }
+    </style>
+    <script>
+        window.addEventListener("load", () => {
+            const loader = document.querySelector(".loader");
+
+            loader.classList.add("loader-hidden");
+
+            loader.addEventListener("transition", () => {
+                docment.body.removeChild(".loader");
+            })
+        })
+    </script>
+
+
+</head>
+
+<body>
+
+
+    <!--   *************************   navbar   ************************* -->
+
+
+    <!-- <div class="loader"></div> -->
+
+    <div class="container-fluid px-0">
+        <div class="row">
+            <div class="col-4"> </div>
+            <div class="col-12 ">
+                <nav class="navbar navbar-expand-lg navbar-dark  bg-dark p-1">
+
+                    <div class="logo m-0">
+                        <img class="mx-4" src="{{ url_for('static', filename = 'Logo.png')}}"
+                            style="height: 55px; width: 100px; ">
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav ml-auto">
+                            <button class="btn nav-link btn-navbar mx-3 text-white activity" id="profile">Profile</button>
+                            <button class="btn nav-link btn-navbar mx-3 text-white" id="dashboard">Dashboard</button>
+                            <button class="btn nav-link btn-navbar mx-3 text-white" id="holding">Holding</button>
+                            <button class="btn nav-link btn-navbar mx-3 text-white" id="position">Position</button>
+                            <button class="btn nav-link btn-navbar mx-3 text-white" id="funds">Funds</button>
+                            <button class="btn nav-link btn-navbar mx-3 text-white"><a onclick="checker()" href={{
+                                    url_for('logout')}} class="text-white"> Logout
+                                </a></button>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid">
+        <div class="row">
+
+
+            <!--    *********************   left panel  ******************* -->
+
+
+            <div class="container-fluid">
+                <div class="row p-0 bg-light">
+                    <div class="col-lg-4 left-panal bg-light border border-dark p-0 "
+                        style="width: 100%; height: 675px;">
+                        <table class="table table-striped tb-border my-1">
+                            <tr>
+                                <td><input type="search" name="search" placeholder="Search" id="search"
+                                        class="e-search ml-4">
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table class="table m-0">
+                            <tbody>
+                                <tr>
+                                    <td>COMPANY</td>
+                                    <td align="center">OPEN</td>
+                                    <td align="center">CLOSE</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="scroll" id="search_company">
+                            <form action="" method="post">
+                                <table class="table table-striped m-0">
+                                    {% for row in data %}
+                                    <tr class="main">
+                                        <td>{{row.1}}</td>
+                                        {% set open = "{:.2f}".format(row.3|float) %}
+                                        <td align="right">{{open}}</td>
+                                        {% set close = "{:.2f}".format(row.4|float) %}
+                                        <td align="right">{{close}}</td>
+                                        <td>
+                                            <div class="row sub">
+                                                <button type="button" class="btn btn-success btn-td mr-2"><a href={{
+                                                        url_for('buy', id=row.1)}}>buy</a></button>
+                                                <button type="button" class="btn btn-danger btn-td  mr-2"><a href={{
+                                                        url_for('sell', id=row.1)}}>sell</a></button>
+                                                <button type="button" class="btn btn-warning btn-td  mr-2"><a href={{
+                                                        url_for('chart', id=row.1)}}>Chart</a></button>
+                                                <button type="button" class="btn btn-info btn-td  mr-2"><a href={{
+                                                        url_for('add', id=row.1)}}>add</a></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+
+
+                    <!-- ************************  right panel  ************* -->
+
+
+                    <div class="col-lg-8">
+                        <iframe src={{ url_for('profile')}} height="100%" width="100%" id="profile1" frameborder="0" name=""
+                            class="">profile</iframe>
+                        <iframe src={{ url_for('dashboard')}} height="100%" width="100%" id="dashboard1" frameborder="0" name=""
+                            class="main_none">Dashboard</iframe>
+                        <iframe src={{ url_for('holding')}} height="100%" width="100%" id="holding1" frameborder="0" name=""
+                            class="main_none">Holding</iframe>
+                        <iframe src={{ url_for('position')}} height="100%" width="100%" id="position1" frameborder="0" name=""
+                            class="main_none">Position</iframe>
+                        <iframe src={{ url_for('fund')}} height="100%" width="100%" id="fund1" frameborder="0" name=""
+                            class="main_none">Fund</iframe>
+                    </div>
+                </div>
+            </div>
+
+
+            <script>
+
+                $(document).ready(function () {
+
+                    $('#profile').on('click', function () {
+                        $('#profile1').show();
+                        $('#dashboard1').hide();
+                        $('#holding1').hide();
+                        $('#position1').hide();
+                        $('#fund1').hide();
+                    });
+
+                    $('#dashboard').on('click', function () {
+                        $('#profile1').hide();
+                        $('#dashboard1').show();
+                        $('#holding1').hide();
+                        $('#position1').hide();
+                        $('#fund1').hide();
+                    });
+
+                    $('#holding').on('click', function () {
+                        $('#profile1').hide();
+                        $('#dashboard1').hide();
+                        $('#holding1').show();
+                        $('#position1').hide();
+                        $('#fund1').hide();
+                    });
+
+                    $('#position').on('click', function () {
+                        $('#profile1').hide();
+                        $('#dashboard1').hide();
+                        $('#holding1').hide();
+                        $('#position1').show();
+                        $('#fund1').hide();
+                    });
+
+                    $('#funds').on('click', function () {
+                        $('#profile1').hide();
+                        $('#dashboard1').hide();
+                        $('#holding1').hide();
+                        $('#position1').hide();
+                        $('#fund1').show();
+                    });
+
+                    load_data();
+                    function load_data(query) {
+                        $.ajax({
+                            url: '/search',
+                            method: 'POST',
+                            data: { query: query },
+                            success: function (data) {
+                                $('#search_company').html(data);
+                                $('#search_company').append(data.htmlresponse)
+
+                            }
+                        });
+                    }
+
+                    $('#search').keyup(function () {
+                        var search_item = $(this).val();
+                        if (search_item != '') {
+                            load_data(search_item);
+                        } else {
+                            load_data();
+                        }
+                    });
+                });
+
+            </script>
+
+            <script>
+
+                function checker() {
+                    var result = confirm(' Are you sure Logout ?');
+                    if (result == false) {
+                        event.preventDefault();
+                    }
+                }
+
+            </script>
+
+</body>
+
+</html>

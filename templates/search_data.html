@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .main {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .tb-border {
+            border: 2px solid black;
+        }
+
+        .sub {
+            /* background: linear-gradient(rgba(0,0,0,0.6), #ffffff); */
+            background-color: rgba(255, 255, 255, 1);
+            position: absolute;
+            width: 0;
+            height: 40px;
+            overflow: hidden;
+            /* left: 16px; */
+            right: 4%;
+            bottom: 5px;
+            transition: width 0s;
+        }
+
+        .main:hover .sub {
+            width: 63%;
+        }
+
+        .btn-td {
+            margin-bottom: 0%;
+            margin-top: 1%;
+            border-radius: 20%;
+            width: 21%;
+            font-weight: 600;
+            height: 90%;
+        }
+
+        .btn-td a {
+            color: #ffffff;
+        }
+
+        .btn-td:nth-child(3) {
+            width: 24%;
+        }
+
+        .e-search {
+            width: 85%;
+        }
+
+        .td_font {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="" method="post">
+        <table class="table table-striped m-0">
+            {% for row in data %}
+            <tr class="main">
+                <td>{{row.1}}</td>
+                <td align="right">{{row.2}}</td>
+                <td align="right">{{row.5}}</td>
+                <td>
+                    <div class="row sub">
+                        <button type="button" class="btn btn-success btn-td mr-2"><a href={{ url_for('buy', id=row.1)}}>buy</a></button>
+                        <button type="button" class="btn btn-danger btn-td  mr-2"><a href={{ url_for('sell', id=row.1)}}>sell</a></button>
+                        <button type="button" class="btn btn-warning btn-td  mr-2"><a href={{ url_for('chart', id=row.1)}}>Chart</a></button>
+                        <button type="button" class="btn btn-info btn-td  mr-2"><a href={{ url_for('add', id=row.1)}}>add</a></button>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </form>
+</body>
+
+</html>

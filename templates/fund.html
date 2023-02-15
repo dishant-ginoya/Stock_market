@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fund</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+    <style>
+        .position-btn {
+            margin-left: auto;
+            position: relative;
+            left: 86%;
+        }
+
+        .position-btn1 {
+            margin-left: auto;
+            position: relative;
+            left: 76%;
+        }
+
+        .size_input {
+            width: 100%;
+            height: 35px;
+        }
+
+        .font_size_fund {
+            font-size: 18px;
+            margin: 4px 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-lg mt-4">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="div h4"><i class="fa fa-timer"></i> Equity </div>
+                    </div>
+                    <div class="card-body">
+
+                        {% for row in amount %}
+
+                        <table class="table">
+                            <tr>
+                                <td> Available margin</td>
+                                <td align="right"> 0.00 </td>
+                            </tr>
+                            <tr>
+                                <td> Used margin </td>
+                                <td align="right"> 0.00 </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5> Available cash </h5>
+                                </td>
+                                {% set total = "{:.2f}".format(row) %}
+                                <td align="right">
+                                    <h5>{{total}}</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> Opening balance </td>
+                                <td align="right"> 0.00</td>
+                            </tr>
+                            <tr>
+                                <td> Payin </td>
+                                <td align="right"> 0.00 </td>
+                            </tr>
+                            <tr>
+                                <td> Payout </td>
+                                <td align="right"> 0.00 </td>
+                            </tr>
+                            <tr>
+                                <td> SPAN </td>
+                                <td align="right"> 0.00 </td>
+                            </tr>
+                            <tr>
+                                <td> Delivery margin </td>
+                                <td align="right"> 0.00 </td>
+                            </tr>
+                            <tr>
+                                <td> Exposure </td>
+                                <td align="right"> 0.00 </td>
+                            </tr>
+                            <tr>
+                                <td> Options premium </td>
+                                <td align="right"> 0.00 </td>
+                            </tr>
+                            <tr>
+                                <td> Total collateral </td>
+                                <td align="right"> 0.00 </td>
+                            </tr>
+                        </table>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+
+                <!--    ***************   deposit   ******************   -->
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Add Cash</h4>
+                    </div>
+                    <form method="post" action={{ url_for('deposit')}}>
+                        <div class="card-body">
+                            <lable class="font_size_fund">Holder Name </lable><br>
+                            <input type="text" name="person_name" style="text-transform: uppercase;" pattern="[A-z]{2,10} [A-z]{2,10}"
+                                placeholder="HOLDER NAME AS PER CRAD" class="size_input" required><br>
+                            <label class="font_size_fund">Card Number </label><br>
+                            <input name="card_number" id="card_number" maxlength="19" pattern="[1-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}"
+                                class="size_input"
+                                placeholder="&#8226;&#8226;&#8226;&#8226;&nbsp;&#8226;&#8226;&#8226;&#8226;&nbsp;&#8226;&#8226;&#8226;&#8226;&nbsp;&#8226;&#8226;&#8226;&#8226;"
+                                required><br>
+                            <div class="row">
+                                <div class="col-6">
+                                    <lable class="font_size_fund mt-1">Expiry</lable><br>
+                                    <input type="tel" id="expiry_date" maxlength="5" pattern="[0-9]{2}/[0-9]{2}" class="size_input"
+                                        placeholder="MM/YY" required>
+                                </div>
+                                <div class="col-6">
+                                    <lable class="font_size_fund mt-1">CVV/CVS</lable><br>
+                                    <input type="password" class="size_input" maxlength="3" pattern="[0-9]{3}"
+                                        placeholder="&#8226;&#8226;&#8226;" required>
+                                </div>
+                                <div class="col-12">
+                                    <lable class="font_size_fund mt-1">Amount</lable><br>
+                                    <input type="tel" name="amount" pattern="[1-9]{1}[0-9]{1,4}" class="size_input"
+                                        placeholder="100 - 99999" required>
+                                    <p class="text-danger mt-1" style="font-size: 12px; margin-bottom: -5px;"><b>*Note : Minimum 100RS</b>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary position-btn">Add </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!--    ***************   withdraw   ******************   -->
+
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h4>Withdraw Amount</h4>
+                    </div>
+                    <form method="post" action={{ url_for('withdraw')}}>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <lable class="font_size_fund">UPI ID </lable><br>
+                                    <input type="text" name="upi_id" style="text-transform: lowercase;" pattern="[a-z0-9]+@[a-z]{3,6}" placeholder="UPI ID"
+                                        class="size_input" required><br>
+                                </div>
+                                <div class="col-6">
+                                    <lable class="font_size_fund">Phone no</lable><br>
+                                    <input type="text" id="phone_number" maxlength="11" pattern="[6-9]{1}[0-9]{4} [0-9]{5}" placeholder="Phone number"
+                                        class="size_input" required><br>
+                                </div>
+                                <div class="col-6">
+                                    <lable class="font_size_fund">Amount</lable><br>
+                                    <input type="text" name="amount" pattern="[1-9]{1}[0-9]{1,4}"
+                                        placeholder="100 - 99999" class="size_input" required><br>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary position-btn1">Withdraw </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        card_number.addEventListener('keyup', function (e) {
+            if (e.keyCode !== 8) {
+                if (this.value.length === 4 || this.value.length === 9 || this.value.length === 14) {
+                    this.value = this.value += ' ';
+                }
+            }
+        });
+
+        expiry_date.addEventListener('keyup', function (e) {
+            if (e.keyCode !== 8) {
+                if (this.value.length === 2) {
+                    this.value = this.value += '/';
+                }
+            }
+        });
+        phone_number.addEventListener('keyup', function (e) {
+            if (e.keyCode !== 8) {
+                if (this.value.length === 5) {
+                    this.value = this.value += ' ';
+                }
+            }
+        });
+    </script>
+
+
+
+</body>
+
+</html>

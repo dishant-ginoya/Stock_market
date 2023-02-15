@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title> Registration </title>
+    <style>
+        body {
+            background-color: #9d2211;
+            background-image: linear-gradient(90deg, #8f3275, #29259a);
+        }
+
+        .hii {
+            box-shadow: -5px 7px 24px black;
+            width: 60%;
+        }
+
+        p {
+            font-size: 27px;
+            margin-bottom: 0px;
+        }
+
+        .form-control {
+            border: 1px solid rgb(140, 129, 129);
+        }
+
+        .nav-margin {
+            margin: 0px -15px;
+            width: 101.9%;
+        }
+
+        .uppercase {
+            text-transform: uppercase;
+        }
+
+        .capitalize {
+            text-transform: capitalize;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid nav-margin">
+        <div class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-expand-lg navbar-dark  bg-dark p-1">
+
+                    <div class="logo m-0">
+                        <img class="mx-4" src="{{ url_for('static', filename = 'Logo.png')}}"
+                            style="height: 55px; width: 100px; ">
+                    </div>
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse nav-ul" id="navbarNavAltMarkup">
+                        <div class="navbar-nav ml-auto">
+                            <a class="nav-item nav-link ml-3 " href={{ url_for('base')}}>LOG IN</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container my-4 bg-white hii">
+        <div class="row">
+            <div class="col mt-3 text-center">
+                <p class=" py-2"> REGISTRATION </p>
+            </div>
+        </div>
+        <form class="row g-3 mx-1 p-2 py-3 " method="post" action={{ url_for('sing_up')}}>
+            <div class="col-lg-4">
+                <label>First name :</label>
+                <input type="text" class="form-control capitalize" pattern="[A-z]{1}[a-z]{2,10}" name="f_name"
+                    placeholder="Surname" required>
+            </div>
+            <div class="col-lg-4">
+                <label>Middle name :</label>
+                <input type="text" class="form-control capitalize" name="m_name" pattern="[A-z]{1}[a-z]{2,10}}"
+                    placeholder="Your name" required>
+            </div>
+            <div class="col-lg-4">
+                <label>Last name :</label>
+                <input type="text" class="form-control capitalize" pattern="[A-z]{1}[a-z]{2,10}}" name="l_name"
+                    placeholder="Father name" required>
+            </div>
+
+            <div class="col-lg-4 my-2">
+                <label> Email ID :</label>
+                <input type="email" name="email" class="email form-control" id="email"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Email" required>
+                <div class="invalid-feedback feedback-pos">
+                    Please input valid email ID
+                </div>
+            </div>
+            <div class="col-lg-4 my-2">
+                <label> Phone Number :</label>
+                <input type="tel" pattern="[6-9]{1}[0-9]{9}" maxlength="10" class="form-control" name="phone"
+                    placeholder="1234567890" required>
+            </div>
+            <div class="col-lg-4 my-2">
+                <label>Pan card Number :</label>
+                <input type="tel" pattern="[A-z]{5}[0-9]{4}[A-z]{1}" maxlength="10" class="form-control uppercase"
+                    placeholder="ABCDE1234A" name="pan_num" required>
+            </div>
+
+            <div class="col-lg-4 my-2">
+                <label>Bank name :</label>
+                <select class="form-control" name="bank_name" required>
+                    <option disabled selected>Select Bank</option>
+                    <option value="sbi">SBI-State Bank of India</option>
+                    <option value="hdfc">HDFC-Housing Development Finance Corporation</option>
+                    <option value="icici">Industrial Credit and Investment Corporation of India</option>
+                    <option value="idbi">IDBI-Industrial Development Bank of India</option>
+                </select>
+            </div>
+            <div class="col-lg-4 my-2">
+                <label>IFSC Code :</label>
+                <input type="text" pattern="^[A-z]{4}0[A-z0-9]{6}$" maxlength="11" class="form-control uppercase"
+                    placeholder="ABCD0123456" name="ifsc_code" required>
+            </div>
+            <div class="col-lg-4 my-2">
+                <label> DP No. :</label>
+                <input class="form-control" value="12004356" name="dp_no" placeholder="" readonly>
+            </div>
+
+
+            <div class="col-lg-4 my-2">
+                <label>Account Number :</label>
+                <input type="phone" pattern="([0-9]{11,16})" minlength="11" maxlength="16"
+                    class="form-control unselectable" name="acc_num" id="b_acc" placeholder="Account Number" required>
+            </div>
+            <div class="col-lg-4 my-2">
+                <label>Confirm Account Number :</label>
+                <input type="password" oninput="account_number(this)" placeholder="&#8226;&#8226;&#8226;"
+                    onpaste="return false;" class="form-control " name="con_acc" required>
+            </div>
+            <div class="col-lg-4 my-2">
+                <label> BO No. :</label>
+                <input type="phone" pattern="[1-9]{3}[0-9]{5}" maxlength="8" class="form-control" placeholder="12345678"
+                    name="bo_no" required>
+            </div>
+
+            <div class="col-lg-6 my-2">
+                <label> Set Password :</label>
+                <input type="password" id="password" placeholder="&#8226;&#8226;&#8226;" class="form-control"
+                    name="password" required>
+            </div>
+            <div class="col-lg-6 my-2">
+                <label> Comfirm Set Password :</label>
+                <input type="password" id="c_password" class="form-control" placeholder="&#8226;&#8226;&#8226;"
+                    name="c_password" onpaste="return false;" oninput="comfirm_password(this)" required>
+            </div>
+
+
+            <div class="col-lg-4 my-2">
+                <label>Country :</label>
+                <select class="form-control" name="country" required>
+                    <option disabled>Select Country</option>
+                    <option value="india">India</option>
+                </select>
+            </div>
+            <div class="col-lg-4 my-2">
+                <label>State :</label>
+                <select class="form-control" name="state" required>
+                    <option disabled>Select State</option>
+                    <option value="bangal">Bangal</option>
+                    <option value="dehli">Dehli</option>
+                    <option value="gujarat">Gujarat</option>
+                    <option value="keral">Keral</option>
+                </select>
+            </div>
+            <div class="col-lg-4 my-2">
+                <label>City :</label>
+                <select class="form-control" name="city" required>
+                    <option disabled>Select City</option>
+                    <option value="ahemdabad">Ahemdabad</option>
+                    <option value="chenaai">Chennai</option>
+                    <option value="rajkot">Rajkot</option>
+                    <option value="mumbai">Mumbai</option>
+                    <option value="pune">Pune</option>
+                    <option value="surat">Surat</option>
+                </select>
+            </div>
+            <div class="col-12">
+                <br>
+                <iframe src="/term_condition" width="100%" height="150px" class="p-3">term&condotion</iframe>
+            </div>
+
+            <div class="col-12 my-2">
+                <div class="form-check">
+                    <input class="form-check-input is-invalid" type="checkbox" id="invalidCheck3" required>
+                    <label class="form-check-label" for="invalidCheck3">
+                        *Agree to terms and conditions
+                    </label>
+                    <div id="invalidCheck3Feedback" class="invalid-feedback">
+                        You must agree before submitting.
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 my-2">
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+
+        function account_number(input) {
+            if (input.value == document.getElementById("b_acc").value) {
+                input.setCustomValidity('');
+            }
+
+            else {
+                input.setCustomValidity('Account number not match');
+            }
+        }
+
+        function comfirm_password(input) {
+            if (input.value == document.getElementById("password").value) {
+                input.setCustomValidity('');
+            }
+
+            else {
+                input.setCustomValidity('password not match');
+            }
+        }
+
+
+    </script>
+
+</body>
+
+</html>
